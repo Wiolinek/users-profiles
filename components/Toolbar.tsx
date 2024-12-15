@@ -3,6 +3,7 @@
 import { Editor } from '@tiptap/core';
 import { HTMLProps } from 'react';
 import Button from "@/components/Button";
+import { LuBold, LuItalic, LuUnderline } from "react-icons/lu";
 
 interface ToolbarProps extends HTMLProps<HTMLDivElement> {
     editor: Editor | null;
@@ -38,17 +39,17 @@ export default function Toolbar({ editor }: Readonly<ToolbarProps>) {
                 customClass={editor.isActive('paragraph') ? activeClass : ''}
             />
             <Button
-                label="Bold"
+                label={<LuBold />}
                 onClick={() => editor.chain().focus().toggleBold().run()}
                 customClass={editor.isActive('bold') ? activeClass : ''}
             />
             <Button
-                label="Italic"
+                label={<LuItalic />}
                 onClick={() => editor.chain().focus().toggleItalic().run()}
                 customClass={editor.isActive('italic') ? activeClass : ''}
             />
             <Button
-                label="Underline"
+                label={<LuUnderline />}
                 onClick={() => editor.chain().focus().toggleUnderline().run()}
                 customClass={editor.isActive('underline') ? activeClass : ''}
             />
