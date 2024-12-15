@@ -1,14 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LuTrash2, LuSend } from "react-icons/lu";
 import dayjs from "dayjs";
-import { useState } from "react";
 import { deleteUserProfile } from "@/actions/actions";
 import { UserProfileType } from "@/types/user.interface";
 import Tiptap from "@/components/Tiptap";
+import Button from "@/components//Button";
 
 interface UserProfileFormProps {
     id?: string;
@@ -50,6 +51,8 @@ export default function UserProfileForm({
             setIsSubmitting(false);
         } catch (error) {
             console.error("Submission failed:", error);
+        } finally {
+            window.location.reload();
         }
     };
 
@@ -137,13 +140,11 @@ export default function UserProfileForm({
             </div>
             <div className="flex justify-between w-full">
                 {pathname !== "/new-user" && (
-                    <button
-                        type="button"
-                        className="flex gap-3 py-4 px-8 w-fit rounded-md bg-red text-white hover:bg-red-hover disabled:bg-gray-200 disabled:text-black uppercase"
+                    <Button
+                        customClass="flex gap-3 py-4 px-8 w-fit rounded-md bg-red text-white hover:bg-red-hover disabled:bg-gray-200 disabled:text-black uppercase"
                         onClick={() => deleteUserProfileHandler(id!)}
                         disabled={isSubmitting}
-                    >
-                        {isSubmitting ? (
+                        label={isSubmitting ? (
                             "Deleting..."
                         ) : (
                             <>
@@ -151,14 +152,13 @@ export default function UserProfileForm({
                                 Delete user profile
                             </>
                         )}
-                    </button>
+                    />
                 )}
-                <button
+                <Button
                     type="submit"
-                    className="flex gap-3 py-4 px-8 w-fit mr-0 ml-auto rounded-md bg-primary text-white hover:bg-primary-hover disabled:bg-gray-200 disabled:text-black uppercase"
+                    customClass="flex gap-3 py-4 px-8 w-fit mr-0 ml-auto rounded-md bg-primary text-white hover:bg-primary-hover disabled:bg-gray-200 disabled:text-black uppercase"
                     disabled={isSubmitting}
-                >
-                    {isSubmitting ? (
+                    label={isSubmitting ? (
                         "Sending data..."
                     ) : (
                         <>
@@ -166,7 +166,7 @@ export default function UserProfileForm({
                             {pathname === "/new-user" ? "Save" : "Update"}
                         </>
                     )}
-                </button>
+                />
             </div>
         </form>
     );

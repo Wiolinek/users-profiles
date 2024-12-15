@@ -35,7 +35,7 @@ export default async function UserProfilesListPage() {
                 }
             </ul>
             <div className="mt-10 flex justify-end">
-                <Link href="/new-user" className="flex gap-3 py-4 px-8 rounded-md bg-primary text-sm text-white hover:bg-primary-hover uppercase">
+                <Link href="/new-user" className="flex gap-3 py-4 px-8 rounded-md border-2 border-primary bg-primary text-sm text-white hover:bg-primary-hover hover:border-primary-hover uppercase">
                     <LuUserPlus size={20} />
                     Add new user profile
                 </Link>
