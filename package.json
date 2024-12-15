@@ -10,6 +10,12 @@
   },
   "dependencies": {
     "@prisma/client": "^6.0.1",
+    "@tiptap/extension-bold": "^2.10.3",
+    "@tiptap/extension-heading": "^2.10.3",
+    "@tiptap/extension-italic": "^2.10.3",
+    "@tiptap/extension-underline": "^2.10.3",
+    "@tiptap/react": "^2.10.3",
+    "@tiptap/starter-kit": "^2.10.3",
     "dayjs": "^1.11.13",
     "next": "15.1.0",
     "react": "^19.0.0",

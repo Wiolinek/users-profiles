@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LuPencil } from "react-icons/lu";
 import dayjs from "dayjs";
 
-export interface UserProfileProps {
+interface UserProfileProps {
     userProfile: UserProfileType;
 }
 

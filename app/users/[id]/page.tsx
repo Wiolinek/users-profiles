@@ -4,16 +4,17 @@ import UserProfileForm from "@/components/UserProfileForm";
 import { updateUserProfile } from "@/actions/actions";
 import NotFound from "@/app/not-found";
 
-export interface UserProfilePageParams {
-    params: {
+interface UserProfilePageParams {
+    params: Promise<{
         id: string;
-    };
+    }>;
 }
 
 export default async function UserProfilePage({ params }: Readonly<UserProfilePageParams>) {
-    const userProfile: UserProfileType = await prisma.userProfile.findUnique({
+    const id = (await params).id;
+    const userProfile: UserProfileType | null = await prisma.userProfile.findUnique({
         where: {
-            id: Number(params.id),
+            id: Number(id),
         }
     });
 
@@ -26,7 +27,7 @@ export default async function UserProfilePage({ params }: Readonly<UserProfilePa
     return (
         <main className="container mx-auto my-20">
             <h1 className="mb-6 text-2xl font-bold text-primary uppercase">Edit User Profile</h1>
-            <UserProfileForm id={params.id} userData={userProfile} action={updateUserProfile} />
+            <UserProfileForm id={id} userData={userProfile} action={updateUserProfile} />
         </main>
     );
 }
