@@ -48,7 +48,7 @@ export const {
                 } else {
                     const isMatch = bcrypt.compareSync(
                         credentials.password as string,
-                        user.hashedPassword
+                        user.hashedPassword as string
                     );
                     if (!isMatch) {
                         throw new Error("Incorrect password.");
