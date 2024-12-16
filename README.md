@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Users Profiles App
+
+This is a Next.js application that allows managing user profiles, allowing admin users to create, edit and delete personal information securely.
+
+## Live demo [_here_](https://users-profiles-six.vercel.app/)
+
+## Table of Contents
+
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [Screenshots](#screenshots)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Running the Application](#running-the-application)
+- [API](#api)
+- [Folder Structure](#folder-structure)
+- [Contact](#contact)
+
+## Features
+
+- Fetching user profiles from Mysql database
+- Login admin accounts
+- Creating admin accounts
+- Modifying user profiles
+- Adding and removing user profiles
+- Creating profile description using rich text editor
+
+## Technologies Used
+
+- Next.js
+- TypeScript
+- Tailwind CSS
+- Prisma ORM
+- Next Auth
+- Tiptap editor
+
+## Screenshots
+
+![Desktop View](public/images/desktop-1.png)
+![Mobile View](public/images/mobile-1.png)
+![Desktop View](public/images/desktop-2.png)
+![Mobile View](public/images/mobile-2.png)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) (version 14 or later)
+- [npm](https://www.npmjs.com/get-npm) (comes with Node.js)
+
+### Installation
+
+1.  Clone the repository:
+
+    ```bash
+    git clone https://github.com/Wiolinek/users-profiles.git
+    ```
+
+2.  Install the dependencies:
+
+    ```bash
+    cd users-profiles-app
+    npm ci
+    ```
+
+3.  Set up env variables:
+
+    DATABASE_URL= mysql connection string
+
+    AUTH_SECRET= to generate a random string, you can use the Auth.js CLI: npx auth secret
+
+### Running the Application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+application is running on http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application fetches data from the Mysql database using Prisma ORM:
 
-## Learn More
+## Folder Structure
 
-To learn more about Next.js, take a look at the following resources:
+Here's an overview of the project's folder structure:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    /users-profiles-app
+        ├── /actions                   # Server-side actions
+        ├── /app                       # Application folder (Next.js app directory)
+        ├── /components                # Reusable components
+        ├── /lib                       # Libraries and utilities
+        ├── /prisma                    # Prisma ORM schema
+        ├── /public                    # Static files and assets
+        ├── /types                     # TypeScript interfaces
+        ├── /utils                     # Helper utility functions
+        ├── auth.ts                    # Auth configuration
+        ├── next.config.ts             # Next.js configuration
+        ├── package.json               # NPM package configuration
+        ├── README.md                  # Project documentation
+        └── tsconfig.json              # TypeScript configuration
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Created by [@Wiolinek](https://github.com/Wiolinek) - feel free to contact me!
