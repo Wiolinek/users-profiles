@@ -17,7 +17,7 @@ export default function Toolbar({ editor }: Readonly<ToolbarProps>) {
     }
 
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap">
             <Button
                 label="H1"
                 onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}

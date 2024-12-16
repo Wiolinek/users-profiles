@@ -62,8 +62,8 @@ export default function UserProfileForm({
             encType="multipart/form-data"
             className="flex flex-col mt-14 text-sm"
         >
-            <div className="flex gap-6 mb-14">
-                <div className="flex flex-col gap-6 w-1/2">
+            <div className="flex flex-col sm:flex-row gap-6 mb-14">
+                <div className="flex flex-col gap-6 sm:w-1/2">
                     <label className="flex flex-col gap-2 uppercase">
                         First name
                         <input
@@ -96,7 +96,7 @@ export default function UserProfileForm({
                                     : ""
                             }
                             max={dayjs().format("YYYY-MM-DD")}
-                            className="border-2 rounded-md p-2 w-[200px]"
+                            className="border-2 rounded-md p-2 md:max-w-[240px]"
                         />
                     </label>
                     <label className="flex flex-col gap-2 uppercase">
@@ -130,7 +130,7 @@ export default function UserProfileForm({
                         )}
                     </label>
                 </div>
-                <label className="flex flex-col gap-2 w-1/2 tiptap h-fit" suppressHydrationWarning>
+                <label className="flex flex-col gap-2 sm:w-1/2 h-fit tiptap">
                     Description
                     <Tiptap
                         description={userData?.richText || ""}
@@ -138,10 +138,10 @@ export default function UserProfileForm({
                     />
                 </label>
             </div>
-            <div className="flex justify-between w-full">
+            <div className="flex flex-wrap gap-3 justify-between w-full">
                 {pathname !== "/users/new-user" && (
                     <Button
-                        customClass="flex gap-3 py-4 px-8 w-fit rounded-md bg-red text-white hover:bg-red-hover disabled:bg-gray-200 disabled:text-black uppercase"
+                        customClass="flex justify-center gap-3 p-3 sm:py-4 sm:px-8 w-full sm:w-fit rounded-md bg-red text-white hover:bg-red-hover disabled:bg-gray-200 disabled:text-black uppercase"
                         onClick={() => deleteUserProfileHandler(id!)}
                         disabled={isSubmitting}
                         label={isSubmitting ? (
@@ -149,21 +149,21 @@ export default function UserProfileForm({
                         ) : (
                             <>
                                 <LuTrash2 size={20} />
-                                Delete user profile
+                                Delete profile
                             </>
                         )}
                     />
                 )}
                 <Button
                     type="submit"
-                    customClass="flex gap-3 py-4 px-8 w-fit mr-0 ml-auto rounded-md bg-primary text-white hover:bg-primary-hover disabled:bg-gray-200 disabled:text-black uppercase"
+                    customClass="flex justify-center gap-3 p-3 sm:py-4 sm:px-8 w-full sm:w-fit mr-0 ml-auto rounded-md bg-primary text-white hover:bg-primary-hover disabled:bg-gray-200 disabled:text-black uppercase"
                     disabled={isSubmitting}
                     label={isSubmitting ? (
                         "Sending data..."
                     ) : (
                         <>
                             <LuSend size={19} />
-                            {pathname === "/users/new-user" ? "Save" : "Update"}
+                            {pathname === "/users/new-user" ? "Save profile" : "Update profile"}
                         </>
                     )}
                 />

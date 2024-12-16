@@ -32,7 +32,7 @@ export default async function UserProfilePage({ params }: Readonly<UserProfilePa
     }
 
     return (
-        <main className="container mx-auto my-20">
+        <main className="container mx-auto my-20 px-4">
             <h1 className="mb-6 text-2xl font-bold text-primary uppercase">Edit User Profile</h1>
             <UserProfileForm id={id} userData={userProfile} action={updateUserProfile} />
         </main>
