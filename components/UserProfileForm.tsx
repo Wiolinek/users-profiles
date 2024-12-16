@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, redirect } from "next/navigation";
 import { LuTrash2, LuSend } from "react-icons/lu";
 import dayjs from "dayjs";
 import { deleteUserProfile } from "@/actions/actions";
@@ -26,13 +26,14 @@ export default function UserProfileForm({
     const router = useRouter();
     const [richTextContent, setRichTextContent] = useState(userData?.richText || "");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     const deleteUserProfileHandler = async (id: string) => {
-        setIsSubmitting(true);
+        setIsDeleting(true);
 
         try {
             await deleteUserProfile(id);
-            setIsSubmitting(false);
+            setIsDeleting(false);
         } catch (error) {
             console.error("Submission failed:", error);
         } finally {
@@ -52,7 +53,11 @@ export default function UserProfileForm({
         } catch (error) {
             console.error("Submission failed:", error);
         } finally {
-            window.location.reload();
+            if (pathname !== "/users/new-user") {
+                redirect("/users")
+            } else {
+                window.location.reload();
+            }
         }
     };
 
@@ -143,8 +148,8 @@ export default function UserProfileForm({
                     <Button
                         customClass="flex justify-center gap-3 p-3 sm:py-4 sm:px-8 w-full sm:w-fit rounded-md bg-red text-white hover:bg-red-hover disabled:bg-gray-200 disabled:text-black uppercase"
                         onClick={() => deleteUserProfileHandler(id!)}
-                        disabled={isSubmitting}
-                        label={isSubmitting ? (
+                        disabled={isDeleting}
+                        label={isDeleting ? (
                             "Deleting..."
                         ) : (
                             <>
