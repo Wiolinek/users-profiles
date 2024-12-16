@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.7.4",
     "@prisma/client": "^6.0.1",
     "@tiptap/extension-bold": "^2.10.3",
     "@tiptap/extension-heading": "^2.10.3",
@@ -16,8 +17,11 @@
     "@tiptap/extension-underline": "^2.10.3",
     "@tiptap/react": "^2.10.3",
     "@tiptap/starter-kit": "^2.10.3",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.13",
     "next": "15.1.0",
+    "next-auth": "^5.0.0-beta.25",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0"
