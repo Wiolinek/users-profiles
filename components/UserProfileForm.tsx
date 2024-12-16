@@ -139,7 +139,7 @@ export default function UserProfileForm({
                 </label>
             </div>
             <div className="flex justify-between w-full">
-                {pathname !== "/new-user" && (
+                {pathname !== "/users/new-user" && (
                     <Button
                         customClass="flex gap-3 py-4 px-8 w-fit rounded-md bg-red text-white hover:bg-red-hover disabled:bg-gray-200 disabled:text-black uppercase"
                         onClick={() => deleteUserProfileHandler(id!)}
@@ -163,7 +163,7 @@ export default function UserProfileForm({
                     ) : (
                         <>
                             <LuSend size={19} />
-                            {pathname === "/new-user" ? "Save" : "Update"}
+                            {pathname === "/users/new-user" ? "Save" : "Update"}
                         </>
                     )}
                 />

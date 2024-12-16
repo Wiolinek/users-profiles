@@ -1,11 +1,19 @@
-import UserProfile from "@/components/UserProfile";
-import NotFound from "@/app/not-found";
 import { UserProfileType } from "@/types/user.interface";
 import Link from "next/link";
 import prisma from '@/lib/db';
 import { LuUserPlus } from "react-icons/lu";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
+import UserProfile from "@/components/UserProfile";
+import NotFound from "@/app/not-found";
 
 export default async function UserProfilesListPage() {
+    const session = await auth();
+
+    if (!session?.user) {
+        redirect("/")
+    }
+
     const userProfiles: UserProfileType[] = await prisma.userProfile.findMany();
 
     if (userProfiles.length === 0) {
@@ -35,7 +43,7 @@ export default async function UserProfilesListPage() {
                 }
             </ul>
             <div className="mt-10 flex justify-end">
-                <Link href="/new-user" className="flex gap-3 py-4 px-8 rounded-md border-2 border-primary bg-primary text-sm text-white hover:bg-primary-hover hover:border-primary-hover uppercase">
+                <Link href="users/new-user" className="flex gap-3 py-4 px-8 rounded-md border-2 border-primary bg-primary text-sm text-white hover:bg-primary-hover hover:border-primary-hover uppercase">
                     <LuUserPlus size={20} />
                     Add new user profile
                 </Link>

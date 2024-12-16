@@ -1,5 +1,7 @@
 import { UserProfileType } from "@/types/user.interface";
 import prisma from '@/lib/db';
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 import UserProfileForm from "@/components/UserProfileForm";
 import { updateUserProfile } from "@/actions/actions";
 import NotFound from "@/app/not-found";
@@ -11,6 +13,11 @@ interface UserProfilePageParams {
 }
 
 export default async function UserProfilePage({ params }: Readonly<UserProfilePageParams>) {
+    const session = await auth();
+
+    if (!session?.user) {
+        redirect("/")
+    }
     const id = (await params).id;
     const userProfile: UserProfileType | null = await prisma.userProfile.findUnique({
         where: {
