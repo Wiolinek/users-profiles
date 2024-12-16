@@ -2,7 +2,6 @@
 
 import { signIn, signOut } from "@/auth";
 import prisma from "@/lib/db";
-import { AuthError } from "next-auth";
 import { revalidatePath } from "next/cache";
 
 export async function getUserByEmail(email: string) {
@@ -36,9 +35,15 @@ export async function login(formData: FormData) {
     }
 
     return result;
-  } catch (error) {
-    const errorCause = error.cause?.err || error.message || "An unknown authentication error occurred.";
-    throw new Error(errorCause);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      const errorCause = error.cause && typeof error.cause === "object" && "err" in error.cause
+        ? (error.cause as { err: string }).err
+        : error.message || "An unknown authentication error occurred.";
+      throw new Error(errorCause);
+    } else {
+      throw new Error("An unknown error occurred");
+    }
   } finally {
     revalidatePath("/users");
   }
