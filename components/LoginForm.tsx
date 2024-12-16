@@ -1,16 +1,34 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Button from "@/components/Button";
 import { login } from "@/actions/auth";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 
 export default function LoginForm() {
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState<string>("");
+    const router = useRouter();
+
+    const handleSubmit = async (formData: FormData) => {
+        setError("");
+        try {
+            const result = await login(formData);
+            if (result) {
+                router.push("/users");
+            }
+        } catch (err) {
+            setError((err as Error).message);
+            setTimeout(() => {
+                setError("");
+            }, 3000);
+        }
+    };
 
     return (
         <form
-            action={login}
+            action={handleSubmit}
             className="flex flex-col mt-14 text-sm"
         >
             <div className="flex flex-col gap-6">
@@ -45,11 +63,11 @@ export default function LoginForm() {
                         </button>
                     </div>
                 </label>
-
             </div>
+            <p className="text-red mt-3 h-5">{error}</p>
             <Button
                 type="submit"
-                customClass="flex justify-center gap-3 py-4 px-8 mt-10 rounded-md bg-primary text-white hover:bg-primary-hover disabled:bg-gray-200 disabled:text-black uppercase"
+                customClass="flex justify-center gap-3 py-4 px-8 mt-6 rounded-md bg-primary text-white hover:bg-primary-hover disabled:bg-gray-200 disabled:text-black uppercase"
                 label="Login"
             />
         </form >

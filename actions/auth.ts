@@ -23,28 +23,26 @@ export async function login(formData: FormData) {
   const rawFormData = {
     email: formData.get("email"),
     password: formData.get("password"),
-    redirectTo: "/users",
   };
 
-  const existingUser = await getUserByEmail(formData.get("email") as string);
-  console.log(existingUser);
-
   try {
-    await signIn("credentials", rawFormData);
-  } catch (error: unknown) {
-    if (error instanceof AuthError) {
-      if (error.type === "CredentialsSignin") {
-        return { error: "Invalid credentials!" };
-      } else {
-        return { error: "Something went wrong!" };
-      }
+    const result = await signIn("credentials", {
+      ...rawFormData,
+      redirect: false,
+    });
+
+    if (result?.error) {
+      throw new Error(result.error);
     }
 
-    throw error;
+    return result;
+  } catch (error) {
+    const errorCause = error.cause?.err || error.message || "An unknown authentication error occurred.";
+    throw new Error(errorCause);
   } finally {
     revalidatePath("/users");
   }
-};
+}
 
 export async function logout() {
   await signOut({ redirectTo: "/" });
