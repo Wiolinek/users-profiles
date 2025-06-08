@@ -4,6 +4,8 @@ This is a Next.js application that allows managing user profiles, allowing admin
 
 ## Live demo [_here_](https://users-profiles-six.vercel.app/)
 
+Enter your email address and password to log in. If an account with that email doesn’t exist it will be created automatically.
+
 ## Table of Contents
 
 - [Features](#features)
